@@ -3,7 +3,6 @@ plugins {
 }
 
 group = 'com.mc1510ty'
-version = '1.0.0'
 
 allprojects {
     repositories {
@@ -20,6 +19,8 @@ allprojects {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/groups/public/"
         }
+
+        version = '1.0.0'
     }
 
     def targetJavaVersion = 21
