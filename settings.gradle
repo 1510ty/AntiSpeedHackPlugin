@@ -1,2 +1,2 @@
 rootProject.name = 'AntiSpeedHackPlugin'
-include 'common', 'spigot-module', 'paper-module'
+include 'common', 'AntiSpeedHackPlugin_PaperVer', 'AntiSpeedHackPlugin_SpigotVer'

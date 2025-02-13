@@ -9,9 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AntiSpeedHackPlugin_PaperVer" />
+            <option value="$PROJECT_DIR$/AntiSpeedHackPlugin_SpigotVer" />
             <option value="$PROJECT_DIR$/common" />
-            <option value="$PROJECT_DIR$/paper-module" />
-            <option value="$PROJECT_DIR$/spigot-module" />
           </set>
         </option>
       </GradleProjectSettings>
