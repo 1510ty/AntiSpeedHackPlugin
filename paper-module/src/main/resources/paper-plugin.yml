@@ -1,0 +1,5 @@
+name: AntiSpeedHackPlugin_PaperVer
+version: '1.0.0'
+main: com.mc1510ty.antiSpeedHackPlugin_PaperVer.AntiSpeedHackPlugin_PaperVer
+api-version: '1.21'
+authors: [1510ty]
