@@ -47,16 +47,13 @@ public class AntiSpeedHackPlugin_SpigotVer extends JavaPlugin implements Listene
             return;
         }
 
-        // 下方向の移動は無視
-        if (to.getY() < from.getY()) {
-            return;
-        }
-
-        // 移動距離を計算
-        double distance = from.distance(to);
+        // X, Z軸のみの水平移動距離を計算
+        double deltaX = to.getX() - from.getX();
+        double deltaZ = to.getZ() - from.getZ();
+        double horizontalDistance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
 
         // 不正な速度を検出した場合
-        if (distance > MAX_ALLOWED_SPEED) {
+        if (horizontalDistance > MAX_ALLOWED_SPEED) {
             // プレイヤーを直前の有効な位置に戻す
             Location lastValidLocation = lastValidLocations.get(player);
             if (lastValidLocation != null) {

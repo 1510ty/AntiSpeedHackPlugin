@@ -34,7 +34,7 @@ public class AntiSpeedHackPlugin_PaperVer extends JavaPlugin implements Listener
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
 
-        // クリエイティブ・スペクテイターモードのプレイヤーは除外
+        // クリエイティブ・スペクテイターモードのプレイヤーを除外
         if (player.getGameMode() == GameMode.CREATIVE || player.getGameMode() == GameMode.SPECTATOR) {
             return;
         }
@@ -42,28 +42,25 @@ public class AntiSpeedHackPlugin_PaperVer extends JavaPlugin implements Listener
         Location from = event.getFrom();
         Location to = event.getTo();
 
-        // 移動がない場合、または下方向の移動は無視
-        if (to == null || from.equals(to) || to.getY() < from.getY()) {
+        // 移動がない場合は無視
+        if (to == null || from.equals(to)) {
             return;
         }
 
-        double distance = from.distance(to);
+        // X, Z軸のみの水平移動距離を計算
+        double deltaX = to.getX() - from.getX();
+        double deltaZ = to.getZ() - from.getZ();
+        double horizontalDistance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
 
-        if (distance > MAX_ALLOWED_SPEED) {
+        // 不正な速度を検出した場合
+        if (horizontalDistance > MAX_ALLOWED_SPEED) {
+            // プレイヤーを直前の有効な位置に戻す
             Location lastValidLocation = lastValidLocations.get(player);
             if (lastValidLocation != null) {
-                // Paper/Folia環境では、グローバルリージョンスケジューラを利用して安全に実行
-                if (Bukkit.getGlobalRegionScheduler() != null) {
-                    Bukkit.getGlobalRegionScheduler().run(this, task -> {
-                        player.teleport(lastValidLocation);
-                        player.sendMessage("不正な速度が検出されました！");
-                    });
-                } else {
-                    // 万が一グローバルリージョンスケジューラが利用できない場合（通常はありえません）
-                    player.teleport(lastValidLocation);
-                    player.sendMessage("不正な速度が検出されました！");
-                }
+                player.teleport(lastValidLocation);
+                player.sendMessage("不正な速度が検出されました！");
             } else {
+                // 最初のケースでは、イベントをキャンセル
                 event.setCancelled(true);
             }
         } else {
@@ -71,4 +68,5 @@ public class AntiSpeedHackPlugin_PaperVer extends JavaPlugin implements Listener
             lastValidLocations.put(player, from.clone());
         }
     }
+
 }
