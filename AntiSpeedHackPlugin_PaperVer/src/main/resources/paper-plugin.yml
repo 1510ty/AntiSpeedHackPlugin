@@ -1,5 +1,6 @@
 name: AntiSpeedHackPlugin_PaperVer
-version: '1.2.1'
+version: '1.2.2'
 main: com.mc1510ty.antiSpeedHackPlugin_PaperVer.AntiSpeedHackPlugin_PaperVer
 api-version: '1.21'
+folia-supported: true
 authors: [1510ty]
